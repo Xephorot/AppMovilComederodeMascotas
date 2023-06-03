@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ApliacacionComederoMascotas"
         tools:targetApi="31">
         <activity
+            android:name=".BotonDispensarActivity"
+            android:exported="false" />
+        <activity
             android:name=".LogInActivity"
             android:exported="false" />
         <activity
