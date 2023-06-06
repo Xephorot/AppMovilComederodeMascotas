@@ -4,7 +4,6 @@
         android:id="@+id/navigation_home"
         android:title="Home"
         android:icon="@drawable/casa" />
-
     <item
         android:id="@+id/navigation_calendar"
         android:title="Calendar"
