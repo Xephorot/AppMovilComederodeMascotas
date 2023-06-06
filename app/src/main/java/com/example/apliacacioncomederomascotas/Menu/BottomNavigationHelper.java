@@ -22,6 +22,8 @@ public class BottomNavigationHelper {
                         return true;
                     case R.id.navigation_profile:
                         Toast.makeText(activity, "Profile selected", Toast.LENGTH_SHORT).show();
+                    case R.id.navigation_buttons:
+                        Toast.makeText(activity, "Buttons selected", Toast.LENGTH_SHORT).show();
                         return true;
                 }
                 return false;
@@ -39,6 +41,8 @@ public class BottomNavigationHelper {
                 break;
             case R.id.navigation_profile:
                 // Acción al seleccionar "Profile"
+            case R.id.navigation_buttons:
+                // Acción al seleccionar "Buttons"
                 break;
         }
     }

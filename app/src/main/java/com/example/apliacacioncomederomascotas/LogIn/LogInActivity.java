@@ -12,11 +12,22 @@ import android.widget.Toast;
 import com.example.apliacacioncomederomascotas.MainActivity;
 import com.example.apliacacioncomederomascotas.R;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.example.apliacacioncomederomascotas.API.ApiClient;
+import com.example.apliacacioncomederomascotas.API.ApiService;
+import com.example.apliacacioncomederomascotas.API.Usuario;
+import com.example.apliacacioncomederomascotas.LogIn.LoginRequest;
+
+import java.util.List;
+
+
 public class LogInActivity extends AppCompatActivity {
     private EditText usernameEditText;
     private EditText passwordEditText;
 
-    private Register register;
+    private ApiService apiService;
     private SessionManager sessionManager;
 
     @Override
@@ -24,7 +35,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        register = Register.getInstance(this);
+        apiService = ApiClient.getClient();
         sessionManager = SessionManager.getInstance(this);
 
         usernameEditText = findViewById(R.id.editTextUsername);
@@ -42,18 +53,6 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
-        Button registerButton = findViewById(R.id.buttonRegister);
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                // Call the registerUser method
-                registerUser(username, password);
-            }
-        });
-
         // Check if the user is already logged in
         if (sessionManager.isLoggedIn()) {
             startMainActivity();
@@ -61,20 +60,41 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        // Implement the login process here
-        // Validate user credentials and proceed accordingly
+        // Create a LoginRequest object with the entered credentials
+        LoginRequest loginRequest = new LoginRequest(username, password);
 
-        if (username.equals("admin") && password.equals("admin")) {
-            sessionManager.saveLoginCredentials(username, password);
-            startMainActivity();
-        } else {
-            Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-        }
-    }
+        // Make the API call to verify the credentials
+        Call<List<Usuario>> call = apiService.obtenerUsuariosPorCorreo(username);
+        call.enqueue(new Callback<List<Usuario>>() {
+            @Override
+            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                if (response.isSuccessful()) {
+                    List<Usuario> usuarios = response.body();
 
-    private void registerUser(String username, String password) {
-        register.registerUser(username, password);
-        // Optionally, perform additional actions after registration
+                    // Check if the entered username and password match any user in the response
+                    for (Usuario usuario : usuarios) {
+                        if (usuario.getCorreoElectronico().equals(username) && usuario.getContrasena().equals(password)) {
+                            // Save the login credentials and start the MainActivity
+                            sessionManager.saveLoginCredentials(username, password);
+                            startMainActivity();
+                            return;
+                        }
+                    }
+
+                    // Invalid username or password
+                    Toast.makeText(LogInActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Handle API call failure
+                    Toast.makeText(LogInActivity.this, "Failed to fetch users", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                // Handle API call failure
+                Toast.makeText(LogInActivity.this, "Failed to fetch users: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void startMainActivity() {
@@ -83,3 +103,4 @@ public class LogInActivity extends AppCompatActivity {
         finish();
     }
 }
+
