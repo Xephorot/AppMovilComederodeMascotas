@@ -6,10 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.apliacacioncomederomascotas.Menu.BottomNavigationHelper;
 import com.example.apliacacioncomederomascotas.R;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
+
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,9 +29,6 @@ public class BotonDispensarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boton_dispensar);
-
-        //Ponemos la funcion para que funcione el menu de la parte inferior
-        BottomNavigationHelper.setupBottomNavigation(this, R.id.bottom_navigation_water);
 
         btnCambiarAgua = findViewById(R.id.ButtonCambioAgua);
         botonDispensar = findViewById(R.id.BotonDispensar);
@@ -58,7 +53,5 @@ public class BotonDispensarActivity extends AppCompatActivity {
                 return true;
             }
         });
-        //Cuando se presione alguno mostrara un mensaje solo prueba para ver si funciona
-        BottomNavigationHelper.handleBottomNavigationItemSelected(this, R.id.navigation_buttons);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.apliacacioncomederomascotas.Menu.BottomNavigationHelper;
 import com.example.apliacacioncomederomascotas.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AguaDispension extends AppCompatActivity {
     private Button botonDispensar;
@@ -28,8 +29,6 @@ public class AguaDispension extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(com.example.apliacacioncomederomascotas.R.layout.activity_agua_dispension);
         //Ponemos la funcion para que funcione el menu de la parte inferior
-        BottomNavigationHelper.setupBottomNavigation(this, R.id.bottom_navigation_water);
-
         btnCambiar = findViewById(R.id.ButtonCambio);
         botonDispensar = findViewById(R.id.BotonDispensarAgua);
         dispensarComidaTxt = findViewById(R.id.DispensarAguatxt);
@@ -54,7 +53,9 @@ public class AguaDispension extends AppCompatActivity {
                 return true;
             }
         });
-        //Cuando se presione alguno mostrara un mensaje solo prueba para ver si funciona
-        BottomNavigationHelper.handleBottomNavigationItemSelected(this, R.id.navigation_buttons);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_buttons); // Seleccionar el botón correspondiente
+
+        BottomNavigationHelper.setupBottomNavigation(bottomNavigationView, this);
     }
 }
