@@ -13,11 +13,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "users";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_FIRST_NAME = "first_name";
+    public static final String COLUMN_LAST_NAME = "last_name";
+    public static final String COLUMN_EMAIL = "email";
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_USERNAME + " TEXT PRIMARY KEY," +
-                    COLUMN_PASSWORD + " TEXT)";
+                    COLUMN_PASSWORD + " TEXT," +
+                    COLUMN_FIRST_NAME + " TEXT," +
+                    COLUMN_LAST_NAME + " TEXT," +
+                    COLUMN_EMAIL + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;

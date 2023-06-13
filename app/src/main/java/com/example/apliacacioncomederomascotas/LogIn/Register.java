@@ -22,12 +22,13 @@ public class Register {
         return instance;
     }
 
-    public void registerUser(String username, String password) {
+    public void registerUser(String username, String password, String email) {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.COLUMN_USERNAME, username);
         values.put(DatabaseHelper.COLUMN_PASSWORD, password);
+        values.put(DatabaseHelper.COLUMN_EMAIL, email);
 
         db.insert(DatabaseHelper.TABLE_NAME, null, values);
         db.close();

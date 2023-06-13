@@ -6,7 +6,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.apliacacioncomederomascotas.Menu.BottomNavigationHelper;
 import com.example.apliacacioncomederomascotas.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
@@ -39,6 +41,7 @@ public class BotonDispensarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(BotonDispensarActivity.this, AguaDispension.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); // Deshabilitar animación de transición
                 finish();
             }
         });
@@ -53,5 +56,10 @@ public class BotonDispensarActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_buttons); // Seleccionar el botón correspondiente
+
+        BottomNavigationHelper.setupBottomNavigation(bottomNavigationView, this);
     }
 }

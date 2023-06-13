@@ -38,6 +38,7 @@ public class AguaDispension extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AguaDispension.this, BotonDispensarActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); // Deshabilitar animación de transición
                 finish();
             }
         });

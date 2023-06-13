@@ -89,7 +89,8 @@ public class LogInActivity extends AppCompatActivity {
             // Valid username and password
             sessionManager.saveLoginCredentials(username, password);
             startMainActivity();
-        } else {
+        }
+        else {
             // Invalid username or password
             Toast.makeText(LogInActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
         }
@@ -99,15 +100,18 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void registerUser(String username, String password) {
+        String email = ""; // Retrieve the email from the user input (e.g., emailEditText.getText().toString())
+
         if (isInputValid(username, password)) {
             if (isUserExists(username)) {
                 Toast.makeText(LogInActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
             } else {
-                Register.getInstance(LogInActivity.this).registerUser(username, password);
+                Register.getInstance(LogInActivity.this).registerUser(username, password, email);
                 Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 
     private boolean isInputValid(String username, String password) {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
