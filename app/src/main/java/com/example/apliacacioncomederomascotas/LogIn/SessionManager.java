@@ -7,7 +7,8 @@ public class SessionManager {
     private static SessionManager instance;
     private SharedPreferences sharedPreferences;
     private static final String PREF_NAME = "LoginPrefs";
-    private static final String KEY_USERNAME = "username";    private static final String KEY_PASSWORD = "password";
+    private static final String KEY_USERNAME = "username";
+    private static final String KEY_PASSWORD = "password";
     private static final String KEY_FIRST_NAME = "firstName";
     private static final String KEY_LAST_NAME = "lastName";
     private static final String KEY_EMAIL = "email";
@@ -38,12 +39,7 @@ public class SessionManager {
 
     public void logoutUser() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(KEY_USERNAME);
-        editor.remove(KEY_PASSWORD);
-        editor.remove(KEY_FIRST_NAME);
-        editor.remove(KEY_LAST_NAME);
-        editor.remove(KEY_EMAIL);
-        editor.remove(KEY_IS_LOGGED_IN);
+        editor.clear();
         editor.apply();
     }
 

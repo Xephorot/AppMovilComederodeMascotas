@@ -14,14 +14,17 @@
         android:theme="@style/Theme.ApliacacionComederoMascotas"
         tools:targetApi="31">
         <activity
+            android:name=".Calendario.CalendarActivity"
+            android:exported="false" />
+        <activity
             android:name=".Perfil.ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".BotonDispensar.AguaDispension"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".BotonDispensar.BotonDispensarActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".LogIn.LogInActivity"
             android:exported="true">
@@ -33,7 +36,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
