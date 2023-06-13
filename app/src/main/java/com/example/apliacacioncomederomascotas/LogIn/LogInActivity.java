@@ -3,7 +3,10 @@ package com.example.apliacacioncomederomascotas.LogIn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,22 +15,12 @@ import android.widget.Toast;
 import com.example.apliacacioncomederomascotas.MainActivity;
 import com.example.apliacacioncomederomascotas.R;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import com.example.apliacacioncomederomascotas.API.ApiClient;
-import com.example.apliacacioncomederomascotas.API.ApiService;
-import com.example.apliacacioncomederomascotas.API.Usuario;
-import com.example.apliacacioncomederomascotas.LogIn.LoginRequest;
-
-import java.util.List;
-
-
 public class LogInActivity extends AppCompatActivity {
+
     private EditText usernameEditText;
     private EditText passwordEditText;
 
-    private ApiService apiService;
+    private DatabaseHelper databaseHelper;
     private SessionManager sessionManager;
 
     @Override
@@ -35,7 +28,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
 
-        apiService = ApiClient.getClient();
+        databaseHelper = new DatabaseHelper(this);
         sessionManager = SessionManager.getInstance(this);
 
         usernameEditText = findViewById(R.id.editTextUsername);
@@ -53,6 +46,18 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
+        Button registerButton = findViewById(R.id.buttonRegister);
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                // Call the register method
+                registerUser(username, password);
+            }
+        });
+
         // Check if the user is already logged in
         if (sessionManager.isLoggedIn()) {
             startMainActivity();
@@ -60,41 +65,84 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void loginUser(String username, String password) {
-        // Create a LoginRequest object with the entered credentials
-        LoginRequest loginRequest = new LoginRequest(username, password);
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
 
-        // Make the API call to verify the credentials
-        Call<List<Usuario>> call = apiService.obtenerUsuariosPorCorreo(username);
-        call.enqueue(new Callback<List<Usuario>>() {
-            @Override
-            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
-                if (response.isSuccessful()) {
-                    List<Usuario> usuarios = response.body();
+        String[] projection = {
+                DatabaseHelper.COLUMN_USERNAME,
+                DatabaseHelper.COLUMN_PASSWORD
+        };
 
-                    // Check if the entered username and password match any user in the response
-                    for (Usuario usuario : usuarios) {
-                        if (usuario.getCorreoElectronico().equals(username) && usuario.getContrasena().equals(password)) {
-                            // Save the login credentials and start the MainActivity
-                            sessionManager.saveLoginCredentials(username, password);
-                            startMainActivity();
-                            return;
-                        }
-                    }
+        String selection = DatabaseHelper.COLUMN_USERNAME + " = ? AND " + DatabaseHelper.COLUMN_PASSWORD + " = ?";
+        String[] selectionArgs = {username, password};
 
-                    // Invalid username or password
-                    Toast.makeText(LogInActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Handle API call failure
-                    Toast.makeText(LogInActivity.this, "Failed to fetch users", Toast.LENGTH_SHORT).show();
-                }
+        Cursor cursor = db.query(
+                DatabaseHelper.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        if (cursor.moveToFirst()) {
+            // Valid username and password
+            sessionManager.saveLoginCredentials(username, password);
+            startMainActivity();
+        } else {
+            // Invalid username or password
+            Toast.makeText(LogInActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+        }
+
+        cursor.close();
+        db.close();
+    }
+
+    private void registerUser(String username, String password) {
+        if (isInputValid(username, password)) {
+            if (isUserExists(username)) {
+                Toast.makeText(LogInActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+            } else {
+                Register.getInstance(LogInActivity.this).registerUser(username, password);
+                Toast.makeText(LogInActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
 
-            @Override
-            public void onFailure(Call<List<Usuario>> call, Throwable t) {
-                // Handle API call failure
-                Toast.makeText(LogInActivity.this, "Failed to fetch users: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+    private boolean isInputValid(String username, String password) {
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+            Toast.makeText(LogInActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isUserExists(String username) {
+        SQLiteDatabase db = databaseHelper.getReadableDatabase();
+
+        String[] projection = {
+                DatabaseHelper.COLUMN_USERNAME
+        };
+
+        String selection = DatabaseHelper.COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = {username};
+
+        Cursor cursor = db.query(
+                DatabaseHelper.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        boolean userExists = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+
+        return userExists;
     }
 
     private void startMainActivity() {
@@ -103,4 +151,3 @@ public class LogInActivity extends AppCompatActivity {
         finish();
     }
 }
-

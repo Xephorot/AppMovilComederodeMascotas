@@ -28,8 +28,6 @@ public class BottomNavigationHelper {
                         return true;
                     case R.id.navigation_buttons:
                         Toast.makeText(activity, "Buttons selected", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(activity, AguaDispension.class);
-                        activity.startActivity(intent);
                         return true;
                 }
                 return false;
@@ -49,6 +47,8 @@ public class BottomNavigationHelper {
                 // Acción al seleccionar "Profile"
             case R.id.navigation_buttons:
                 // Acción al seleccionar "Buttons"
+                Intent intent = new Intent(activity, AguaDispension.class);
+                activity.startActivity(intent);
                 break;
         }
     }

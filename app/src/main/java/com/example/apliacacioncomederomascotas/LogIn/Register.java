@@ -1,6 +1,11 @@
+// Register.java
+
 package com.example.apliacacioncomederomascotas.LogIn;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 public class Register {
     private static Register instance;
@@ -18,8 +23,13 @@ public class Register {
     }
 
     public void registerUser(String username, String password) {
-        // Perform registration process here
-        // Save user data to the server database via API
+        SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_USERNAME, username);
+        values.put(DatabaseHelper.COLUMN_PASSWORD, password);
+
+        db.insert(DatabaseHelper.TABLE_NAME, null, values);
+        db.close();
     }
 }
-

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "591851739142",
+    "project_id": "comedor-mascotas",
+    "storage_bucket": "comedor-mascotas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591851739142:android:a679b9a2f1ebe87fc20b87",
+        "android_client_info": {
+          "package_name": "com.example.apliacacioncomederomascotas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591851739142-fq4hc8itpnbavu09rhjkt4f6qd87rj0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOkMIq9U5oskbvRbGxmII31d68VC7MR-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "591851739142-fq4hc8itpnbavu09rhjkt4f6qd87rj0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
