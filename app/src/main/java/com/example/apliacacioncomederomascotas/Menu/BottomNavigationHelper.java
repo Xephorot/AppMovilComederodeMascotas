@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.MenuItem;
 
 import com.example.apliacacioncomederomascotas.BotonDispensar.AguaDispension;
+import com.example.apliacacioncomederomascotas.Calendario.CalendarActivity;
 import com.example.apliacacioncomederomascotas.MainActivity;
 import com.example.apliacacioncomederomascotas.Perfil.ProfileActivity;
 import com.example.apliacacioncomederomascotas.R;
@@ -29,6 +30,12 @@ public class BottomNavigationHelper {
                         return true;
                     case R.id.navigation_calendar:
                         // Acción al seleccionar "Calendar"
+                        if (!(context instanceof CalendarActivity)) {
+                            Intent intent = new Intent(context, CalendarActivity.class);
+                            context.startActivity(intent);
+                            ((Activity) context).overridePendingTransition(0, 0); // Deshabilitar animación de transición
+                            ((Activity) context).finish();
+                        }
                         return true;
                     case R.id.navigation_buttons:
                         // Acción al seleccionar "Botones"
