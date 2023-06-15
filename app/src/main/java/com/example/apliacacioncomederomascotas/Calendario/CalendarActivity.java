@@ -64,5 +64,4 @@ public class CalendarActivity extends AppCompatActivity {
             Toast.makeText(this, "Alarm set for " + calendar.getTime().toString(), Toast.LENGTH_SHORT).show();
         }
     }
-
 }
