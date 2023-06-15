@@ -20,6 +20,7 @@ public class DispensionHelper {
                 stopDispensing(dispensarComidaTxt);
                 dispensarComidaTxt.setText("Deteniendo Dispensación");
                 mqttManager.publishMessage("boton_bool", "0");
+                mqttManager.publishMessage("boton_bool", "4");
             }
         }.start();
     }
