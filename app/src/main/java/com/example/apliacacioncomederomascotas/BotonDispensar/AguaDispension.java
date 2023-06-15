@@ -21,17 +21,25 @@ public class AguaDispension extends AppCompatActivity {
     private TextView dispensarComidaTxt;
     private CountDownTimer countDownTimer;
 
+    private MqttManager mqttManager;
+
     private static final long MAX_DURATION = 5000; // 5 segundos
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.example.apliacacioncomederomascotas.R.layout.activity_agua_dispension);
+        setContentView(R.layout.activity_agua_dispension);
         //Ponemos la funcion para que funcione el menu de la parte inferior
         btnCambiar = findViewById(R.id.ButtonCambio);
         botonDispensar = findViewById(R.id.BotonDispensarAgua);
         dispensarComidaTxt = findViewById(R.id.DispensarAguatxt);
+
+        // Crear una instancia del MqttManager
+        mqttManager = new MqttManager(AguaDispension.this);
+
+        // Conectar al servidor MQTT
+        mqttManager.connect();
 
         btnCambiar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,13 +55,16 @@ public class AguaDispension extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    DispensionHelper.startDispensing(dispensarComidaTxt);
+                    DispensionHelper.startDispensing(dispensarComidaTxt, mqttManager);
+                    mqttManager.publishMessage("boton_bool", "1");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     DispensionHelper.stopDispensing(dispensarComidaTxt);
+                    mqttManager.publishMessage("boton_bool", "0");
                 }
                 return true;
             }
         });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.navigation_buttons); // Seleccionar el botón correspondiente
 

@@ -33,6 +33,15 @@
         >
 
         <TextView
+            android:id="@+id/Aguatxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Agua"
+            android:textSize="50dp" />
+
+        <TextView
             android:id="@+id/DispensarAguatxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.apliacacioncomederomascotas.MQTT.MqttHandler;
 import com.example.apliacacioncomederomascotas.Menu.BottomNavigationHelper;
 import com.example.apliacacioncomederomascotas.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class BotonDispensarActivity extends AppCompatActivity {
@@ -24,7 +26,7 @@ public class BotonDispensarActivity extends AppCompatActivity {
     private TextView dispensarComidaTxt;
     private CountDownTimer countDownTimer;
 
-    private static final long MAX_DURATION = 15000; // 15 segundos
+    private MqttManager mqttManager;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -36,6 +38,19 @@ public class BotonDispensarActivity extends AppCompatActivity {
         botonDispensar = findViewById(R.id.BotonDispensar);
         dispensarComidaTxt = findViewById(R.id.DispensarComidatxt);
 
+        // Crear una instancia del MqttManager
+        mqttManager = new MqttManager(BotonDispensarActivity.this);
+
+        // Conectar al servidor MQTT
+        mqttManager.connect();
+
+        //Prueba
+        //mqttManager.subscribeToTopic("boton_bool");
+        //mqttManager.publishMessage("boton_bool", "hola");
+
+        //Definir posición Servo
+        mqttManager.publishMessage("boton_bool", "0");
+
         btnCambiarAgua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,13 +60,16 @@ public class BotonDispensarActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         botonDispensar.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    DispensionHelper.startDispensing(dispensarComidaTxt);
+                    DispensionHelper.startDispensing(dispensarComidaTxt, mqttManager);
+                    mqttManager.publishMessage("boton_bool", "1");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     DispensionHelper.stopDispensing(dispensarComidaTxt);
+                    mqttManager.publishMessage("boton_bool", "0");
                 }
                 return true;
             }

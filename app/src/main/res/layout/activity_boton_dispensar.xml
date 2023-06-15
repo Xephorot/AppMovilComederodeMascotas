@@ -33,6 +33,15 @@
         >
 
         <TextView
+            android:id="@+id/Comidatxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Comida"
+            android:textSize="50dp" />
+
+        <TextView
             android:id="@+id/DispensarComidatxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

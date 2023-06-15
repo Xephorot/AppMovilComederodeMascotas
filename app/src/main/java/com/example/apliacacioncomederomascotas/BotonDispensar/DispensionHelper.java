@@ -7,7 +7,7 @@ public class DispensionHelper {
 
     private static final long MAX_DURATION = 5000; // 5 segundos
 
-    public static void startDispensing(TextView dispensarComidaTxt) {
+    public static void startDispensing(TextView dispensarComidaTxt, MqttManager mqttManager) {
         dispensarComidaTxt.setText("Depositando");
         CountDownTimer countDownTimer = new CountDownTimer(MAX_DURATION, 1000) {
             @Override
@@ -19,6 +19,7 @@ public class DispensionHelper {
             public void onFinish() {
                 stopDispensing(dispensarComidaTxt);
                 dispensarComidaTxt.setText("Deteniendo Dispensación");
+                mqttManager.publishMessage("boton_bool", "0");
             }
         }.start();
     }
@@ -27,4 +28,3 @@ public class DispensionHelper {
         dispensarComidaTxt.setText("Dispensar al toque");
     }
 }
-
