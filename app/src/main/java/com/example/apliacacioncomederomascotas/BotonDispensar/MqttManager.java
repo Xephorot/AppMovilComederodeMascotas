@@ -25,12 +25,12 @@ public class MqttManager {
     }
 
     public void publishMessage(String topic, String message) {
-        Toast.makeText(context, "Publishing message: " + message, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Publishing message: " + message, Toast.LENGTH_SHORT).show();
         mqttHandler.publish(topic, message);
     }
 
     public void subscribeToTopic(String topic) {
-        Toast.makeText(context, "Subscribing to topic " + topic, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "Subscribing to topic " + topic, Toast.LENGTH_SHORT).show();
         mqttHandler.subscribe(topic);
     }
 }
