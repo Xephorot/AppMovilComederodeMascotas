@@ -138,5 +138,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int rowsAffected = db.update("users", values, "username = ?", new String[]{username});
         return rowsAffected > 0;
     }
+    //Alarma
 
 }

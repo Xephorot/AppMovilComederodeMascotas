@@ -21,12 +21,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TimePicker
-                android:id="@+id/timePicker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:timePickerMode="spinner" />
-
             <Button
                 android:id="@+id/setAlarmButton"
                 android:layout_width="wrap_content"
