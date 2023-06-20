@@ -7,10 +7,13 @@
     tools:context=".BotonDispensar.AguaDispension"
     app:menu="@menu/bottom_navigation_menu">
 
-    <Button
+    <ImageButton
         android:id="@+id/BotonDispensarAgua"
-        android:layout_width="226dp"
-        android:layout_height="156dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/pawbutton"
+        android:background="@color/white"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,19 +34,6 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         >
-        <Button
-            android:id="@+id/btnHistorial"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="80dp"
-            android:text="Historial"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BotonDispensar"
-            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/Aguatxt"
@@ -51,6 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:text="Agua"
             android:textSize="50dp" />
 
@@ -58,6 +50,8 @@
             android:id="@+id/DispensarAguatxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:text="Dispensar al toque"
             android:textSize="50dp"
             android:layout_gravity="center"
@@ -80,10 +74,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="Comida"
+        android:fontFamily="casual"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BotonDispensarAgua"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:background="@drawable/rounded_button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

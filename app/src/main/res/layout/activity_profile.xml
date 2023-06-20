@@ -18,7 +18,10 @@
             android:id="@+id/editTextFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:hint="First Name"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:inputType="textPersonName" />
 
         <EditText
@@ -26,6 +29,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Last Name"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:inputType="textPersonName" />
 
         <EditText
@@ -33,12 +38,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:inputType="textEmailAddress" />
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
             android:text="Save" />
 
         <EditText
@@ -47,6 +59,8 @@
             android:layout_height="wrap_content"
             android:hint="Current Password"
             android:inputType="textPassword"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:minHeight="48dp" />
 
         <EditText
@@ -55,6 +69,8 @@
             android:layout_height="wrap_content"
             android:hint="New Password"
             android:inputType="textPassword"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:minHeight="48dp" />
 
         <EditText
@@ -63,12 +79,18 @@
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
             android:inputType="textPassword"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:minHeight="48dp" />
 
         <Button
             android:id="@+id/buttonChangePassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:layout_gravity="center"
             android:text="Change Password" />
 
         <Button
@@ -76,7 +98,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="230dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:text="Cerrar Sesion" />
 
     </LinearLayout>

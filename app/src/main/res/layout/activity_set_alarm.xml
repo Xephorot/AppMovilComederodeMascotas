@@ -18,7 +18,9 @@
         <TimePicker
             android:id="@+id/timePicker"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:headerBackground="#FF5722"
+            android:numbersSelectorColor="#FF5722" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,14 +35,18 @@
                 android:layout_height="wrap_content"
                 android:text="Nombre:"
                 android:layout_gravity="center"
-                android:textSize="20dp" />
+                android:fontFamily="cursive"
+                android:textStyle="bold"
+                android:textSize="40dp" />
 
             <EditText
                 android:id="@+id/editTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewName"
-                android:textSize="20dp"
+                android:textSize="30dp"
+                android:fontFamily="cursive"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp"
                 android:hint="Ingrese un nombre" />
         </LinearLayout>
@@ -50,7 +56,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Días de la semana:"
-            android:textSize="20dp"
+            android:textSize="30dp"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:layout_marginTop="8dp" />
 
         <LinearLayout
@@ -68,6 +76,9 @@
                     android:id="@+id/textViewMonday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Lun" />
 
                 <ToggleButton
@@ -89,12 +100,16 @@
                     android:id="@+id/textViewTuesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Mar" />
 
                 <ToggleButton
                     android:id="@+id/toggleButtonTuesday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:textOff=""
                     android:textOn="" />
 
@@ -110,6 +125,9 @@
                     android:id="@+id/textViewWednesday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Mié" />
 
                 <ToggleButton
@@ -131,6 +149,9 @@
                     android:id="@+id/textViewThursday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Jue" />
 
                 <ToggleButton
@@ -152,6 +173,9 @@
                     android:id="@+id/textViewFriday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Vie" />
 
                 <ToggleButton
@@ -173,6 +197,9 @@
                     android:id="@+id/textViewSaturday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Sáb" />
 
                 <ToggleButton
@@ -194,6 +221,9 @@
                     android:id="@+id/textViewSunday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="cursive"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
                     android:text="Dom" />
 
                 <ToggleButton
@@ -214,6 +244,9 @@
             android:layout_below="@id/timePicker"
             android:layout_gravity="center"
             android:text="Guardar"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_button"
             android:layout_marginTop="16dp" />
         <Button
             android:id="@+id/buttonDelete"
@@ -222,6 +255,9 @@
             android:layout_below="@id/timePicker"
             android:layout_gravity="center"
             android:text="Eliminar"
+            android:fontFamily="casual"
+            android:textStyle="bold"
+            android:background="@drawable/rounded_button"
             android:layout_marginTop="16dp" />
 
     </LinearLayout>

@@ -20,11 +20,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="16dp"
             android:textAppearance="?android:textAppearanceLarge"
             android:textColor="@android:color/black"
-            android:textSize="24sp"
+            android:textSize="50dp"
             tools:text="Alarm Time" />
 
         <Button
@@ -32,9 +34,11 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
+            android:fontFamily="casual"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:background="@color/lavender"
+            android:background="@drawable/rounded_button"
             android:text="Stop Alarm"
             android:textColor="@android:color/white"
             android:textSize="30dp" />

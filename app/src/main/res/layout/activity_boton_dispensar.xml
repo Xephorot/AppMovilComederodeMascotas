@@ -7,17 +7,21 @@
     tools:context=".BotonDispensar.BotonDispensarActivity"
     app:menu="@menu/bottom_navigation_menu" >
 
-    <Button
+    <ImageButton
         android:id="@+id/BotonDispensar"
-        android:layout_width="226dp"
-        android:layout_height="156dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        android:src="@drawable/pawbutton"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566"
+        app:layout_constraintVertical_bias="0.565"
+
         tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
@@ -32,25 +36,13 @@
         android:paddingRight="20dp"
         >
 
-        <Button
-            android:id="@+id/btnHistorial"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:text="Historial"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BotonDispensar"
-            app:layout_constraintVertical_bias="0.0" />
-
         <TextView
             android:id="@+id/Comidatxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:gravity="center"
             android:text="Comida"
             android:textSize="50dp" />
@@ -59,11 +51,12 @@
             android:id="@+id/DispensarComidatxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dispensar al toque"
-            android:textSize="50dp"
             android:layout_gravity="center"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
             android:gravity="center"
-            />
+            android:text="Dispensar al toque"
+            android:textSize="50dp" />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -80,11 +73,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="casual"
+        android:textStyle="bold"
         android:text="Agua"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BotonDispensar"
+        android:background="@drawable/rounded_button"
         app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

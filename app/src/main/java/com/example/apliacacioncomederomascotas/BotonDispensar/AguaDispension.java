@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.apliacacioncomederomascotas.Menu.BottomNavigationHelper;
@@ -16,7 +17,7 @@ import com.example.apliacacioncomederomascotas.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AguaDispension extends AppCompatActivity {
-    private Button botonDispensar;
+    private ImageButton botonDispensar;
     private Button btnCambiar;
     private TextView dispensarComidaTxt;
     private CountDownTimer countDownTimer;

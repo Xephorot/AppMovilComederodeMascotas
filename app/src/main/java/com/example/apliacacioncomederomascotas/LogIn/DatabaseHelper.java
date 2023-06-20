@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -100,8 +103,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public boolean recreateTable() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(SQL_DELETE_ENTRIES);
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_DELETE_CALENDAR_TABLE);
+        db.execSQL(SQL_CREATE_CALENDAR_TABLE);
         return true;
     }
     //Usuarios
@@ -110,7 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(COLUMN_FIRST_NAME, newFirstName);
         values.put(COLUMN_LAST_NAME, newLastName);
-        values.put(COLUMN_EMAIL, newEmail);
+        values.put(COLUMN_USERNAME, newEmail);
         int rowsAffected = db.update(TABLE_NAME, values, COLUMN_USERNAME + "=?", new String[]{username});
         return rowsAffected > 0;
     }
@@ -118,13 +121,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String[] userInfo = null;
 
-        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_FIRST_NAME, COLUMN_LAST_NAME, COLUMN_EMAIL},
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_FIRST_NAME, COLUMN_LAST_NAME, COLUMN_USERNAME},
                 COLUMN_USERNAME + "=?", new String[]{username}, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             @SuppressLint("Range") String firstName = cursor.getString(cursor.getColumnIndex(COLUMN_FIRST_NAME));
             @SuppressLint("Range") String lastName = cursor.getString(cursor.getColumnIndex(COLUMN_LAST_NAME));
-            @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COLUMN_EMAIL));
+            @SuppressLint("Range") String email = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME));
             userInfo = new String[]{firstName, lastName, email};
             cursor.close();
         }
@@ -139,5 +142,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
     //Alarma
+    public List<String> getAlarmNames() {
+        List<String> alarmNames = new ArrayList<>();
 
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] columns = {COLUMN_CALENDAR_NAME};
+        String selection = null;
+        String[] selectionArgs = null;
+        String groupBy = null;
+        String having = null;
+        String orderBy = null;
+
+        Cursor cursor = db.query(TABLE_CALENDAR, columns, selection, selectionArgs, groupBy, having, orderBy);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String alarmName = cursor.getString(cursor.getColumnIndex(COLUMN_CALENDAR_NAME));
+                alarmNames.add(alarmName);
+            } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        return alarmNames;
+    }
 }
+

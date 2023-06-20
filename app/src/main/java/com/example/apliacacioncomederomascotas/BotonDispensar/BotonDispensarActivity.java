@@ -15,13 +15,14 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class BotonDispensarActivity extends AppCompatActivity {
 
-    private Button botonDispensar;
+    private ImageButton botonDispensar;
     private Button btnCambiarAgua;
     private TextView dispensarComidaTxt;
     private CountDownTimer countDownTimer;
