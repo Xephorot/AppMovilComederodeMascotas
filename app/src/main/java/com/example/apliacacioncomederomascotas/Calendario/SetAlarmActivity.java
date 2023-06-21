@@ -16,6 +16,10 @@ import android.widget.ToggleButton;
 import com.example.apliacacioncomederomascotas.LogIn.DatabaseHelper;
 import com.example.apliacacioncomederomascotas.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class SetAlarmActivity extends AppCompatActivity {
     private ToggleButton toggleButtonMonday;
     private ToggleButton toggleButtonTuesday;
@@ -67,9 +71,6 @@ public class SetAlarmActivity extends AppCompatActivity {
             //Toast.makeText(SetAlarmActivity.this, "Error al Cargar", Toast.LENGTH_SHORT).show();
             // Manejar la excepción de acuerdo a tus necesidades
         }
-
-
-
         // Manejar el evento del botón "Guardar"
         Button buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new View.OnClickListener() {
@@ -146,15 +147,24 @@ public class SetAlarmActivity extends AppCompatActivity {
     private void saveAlarmStates(boolean mondayChecked, boolean tuesdayChecked, boolean wednesdayChecked,
                                  boolean thursdayChecked, boolean fridayChecked, boolean saturdayChecked,
                                  boolean sundayChecked, String alarmName) {
+        // Obtener la hora actual
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String currentTime = sdf.format(calendar.getTime());
+
+        // Reemplazar la línea existente con la hora actual
+
+
         // Obtener una instancia de la base de datos en modo escritura
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
 
         // Crear un objeto ContentValues para guardar los valores
         ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.COLUMN_CALENDAR_HOUR, currentTime);
+
         values.put(DatabaseHelper.COLUMN_CALENDAR_NAME, alarmName);
         values.put(DatabaseHelper.COLUMN_CALENDAR_REPETITIONS, getRepetitionsValue(mondayChecked, tuesdayChecked,
                 wednesdayChecked, thursdayChecked, fridayChecked, saturdayChecked, sundayChecked));
-        values.put(DatabaseHelper.COLUMN_CALENDAR_HOUR, "00:00"); // Reemplaza con la hora real de la alarma
         values.put(DatabaseHelper.COLUMN_CREDENTIALS_USERNAME, "Nombre de usuario"); // Reemplaza con el nombre real de usuario
 
         // Insertar o actualizar los valores en la tabla "calendar"
@@ -189,22 +199,36 @@ public class SetAlarmActivity extends AppCompatActivity {
                           boolean thursdayChecked, boolean fridayChecked, boolean saturdayChecked,
                           boolean sundayChecked) {
         // Lógica para establecer la alarma según los días seleccionados
-
         if (mondayChecked) {
             // Establecer alarma para los lunes a las 8:00 AM
             AlarmManagerHelper.setAlarm(this, 8, 0);
         }
 
         if (tuesdayChecked) {
-            // Establecer alarma para los martes a las 9:00 AM
-            AlarmManagerHelper.setAlarm(this, 9, 0);
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
         }
 
         if (wednesdayChecked) {
-            // Establecer alarma para los miércoles a las 10:00 AM
-            AlarmManagerHelper.setAlarm(this, 10, 0);
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
         }
-
+        if (thursdayChecked) {
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
+        }
+        if (fridayChecked) {
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
+        }
+        if (saturdayChecked) {
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
+        }
+        if (sundayChecked) {
+            // Establecer alarma para los lunes a las 8:00 AM
+            AlarmManagerHelper.setAlarm(this, 8, 0);
+        }
         // Agrega condiciones similares para los demás días de la semana
     }
 }

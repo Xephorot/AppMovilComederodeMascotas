@@ -12,6 +12,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    private Context context;
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "login.db";
     public static final String TABLE_NAME = "users";
@@ -166,6 +167,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return alarmNames;
+    }
+    public Context getContext() {
+        return context;
     }
 }
 
