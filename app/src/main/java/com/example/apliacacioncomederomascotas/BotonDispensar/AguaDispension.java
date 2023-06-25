@@ -57,10 +57,10 @@ public class AguaDispension extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     DispensionHelper.startDispensing(dispensarComidaTxt, mqttManager);
-                    mqttManager.publishMessage("boton_bool", "1");
+                    mqttManager.publishMessage("boton_bool", "3");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     DispensionHelper.stopDispensing(dispensarComidaTxt);
-                    mqttManager.publishMessage("boton_bool", "0");
+                    mqttManager.publishMessage("boton_bool", "4");
                 }
                 return true;
             }

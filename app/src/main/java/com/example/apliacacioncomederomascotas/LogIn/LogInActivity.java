@@ -103,7 +103,9 @@ public class LogInActivity extends AppCompatActivity {
         String email = ""; // Retrieve the email from the user input (e.g., emailEditText.getText().toString())
 
         if (isInputValid(username, password)) {
-            if (isUserExists(username)) {
+            if (!isValidEmail(username)) {
+                Toast.makeText(LogInActivity.this, "El Usuario Neceista un ejemplo de lo siguiente (e.g., example@gmail.com)", Toast.LENGTH_SHORT).show();
+            } else if (isUserExists(username)) {
                 Toast.makeText(LogInActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
             } else {
                 Register.getInstance(LogInActivity.this).registerUser(username, password, email);
@@ -112,6 +114,11 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isValidEmail(String email) {
+        // Simple email validation using a regular expression
+        String emailPattern = "[a-zA-Z0-9._-]+@gmail.com";
+        return email.matches(emailPattern);
+    }
 
     private boolean isInputValid(String username, String password) {
         if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
