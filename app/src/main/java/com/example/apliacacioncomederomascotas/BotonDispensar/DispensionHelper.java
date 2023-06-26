@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 public class DispensionHelper {
 
-    private static final long MAX_DURATION = 5000; // 5 segundos
+    private static final long MAX_DURATION = 50000; // 50 segundos
 
     public static void startDispensing(TextView dispensarComidaTxt, MqttManager mqttManager) {
         dispensarComidaTxt.setText("Depositando");
